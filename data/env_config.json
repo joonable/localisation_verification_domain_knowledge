@@ -1,0 +1,6 @@
+{
+  "prj_path": "~/projects/localisation_verification_domain_knowledge/",
+  "model_output_dir": "~/projects/localisation_verification_domain_knowledge/models/",
+  "cache_dir": "~/.cache/huggingface",
+  "model_load_dir": "~/projects/localisation_verification_domain_knowledge/models/"
+}
