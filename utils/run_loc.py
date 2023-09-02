@@ -38,16 +38,7 @@ def main():
     data_dir = prj_path + "data/"
     cache_dir = env_config["cache_dir"]
     device_id = "cpu" if job_gubun == "locw" else "gpu"
-    # model_path_format = env_config["model_load_dir"] + "{model_id}"
     output_file_dir = prj_path + "data/output_logs/"
-
-    # base_conf_path = data_dir + "clm_base_config.json"
-    # job_conf_path = output_file_dir + f"{job_cd}.json"
-
-    # if job_gubun in ["prnw", "prnbase"]:
-    #     df_local_result_path = data_dir + "localisation_weight.tsv"
-    # elif job_gubun == "prna":
-    #     df_local_result_path = data_dir + "localisation_activation.tsv"
 
     ############################## DATA #####################################
     # dataset_info
@@ -70,7 +61,7 @@ def main():
     n_total_params = sum(p.numel() for p in base_model.parameters())
 
     if job_gubun == "locw":
-        # gpt2_tokenizer = GPT2Tokenizer.from_pretrained("gpt2", cache_dir=cache_dir).to(device_id)
+        print("localisation with weights")
         def get_diff_from_tensors_sub(a, b):
             return torch.abs(a - b).mean().item()
 
@@ -138,7 +129,9 @@ def main():
         df_local_weights["accum_prop_params"] = df_local_weights["accum_params"] / n_total_params
         df_local_weights["modules"] = df_local_weights["modules"].apply(lambda l: ", ".join(l))
         df_local_weights.to_csv(data_dir + "localisation_weight.tsv", sep="\t", index=False)
-    if job_gubun == "loca":
+
+    elif job_gubun == "loca":
+        print("localisation with activations")
         # list_trace_ids
         list_trace_module_ids = df_module.loc[df_module.is_investigated].trace_id.unique()
 
