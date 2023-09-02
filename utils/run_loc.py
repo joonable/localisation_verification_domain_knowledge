@@ -44,11 +44,7 @@ def main():
     ############################## DATA #####################################
     # dataset_info
     df_dataset, df_dataset_ratio = get_dataset_info()
-    list_local_models = df_dataset.loc[
-        (df_dataset.valid)
-        & (df_dataset.localisation),
-        "dataset"
-    ].tolist()
+    list_local_models = df_dataset.loc[df_dataset.localisation, "dataset"].tolist()
 
     # model_info
     config_models = {model_id: {} for model_id in list_local_models}
