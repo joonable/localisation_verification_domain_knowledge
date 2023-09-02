@@ -343,3 +343,12 @@ def main():
         df_local_activations["modules"] = df_local_activations["modules"].apply(lambda l: ", ".join(l))
 
         df_local_activations.to_csv("localisation_activation_.tsv", sep="\t", index=False)
+
+
+def _mp_fn(index):
+    # For xla_spawn (TPUs)
+    main()
+
+
+if __name__ == "__main__":
+    main()
