@@ -47,6 +47,14 @@ To address this limitation, we propose novel localisation methods that extend fr
   - e.g. ``evalin_ver_prna_bot_nlin_l1``, ``evalin_ft_nlin_l1``, ``evalout_gpt2_nlin_l1``
 
 ## How to run the code?
+### 1) env config
+First, you need to fill the environmental settings in ``./data/env_config.json``.
+- "prj_path": project path.
+- "model_output_dir": the directory path to save models. 
+- "cache_dir": the directory path to cache data.
+- "model_load_dir": the directory path to load models.
+
+### 2) list_job_cds
 You can specify the job_codes in the ``list_job_cds`` in ``run_job.sh``. Depending on the job_cd, the corresponding python file is executed.
 
 ```shell
@@ -70,4 +78,10 @@ for _job_cd in "${list_job_cds[@]}"; do
   echo "$_job_cd is executed"
   sleep 5
 done
+```
+
+### 3) run run_job.sh
+```shell
+$ chmod +x ./run_job.sh 
+$ ./run_job.sh
 ```
