@@ -22,8 +22,8 @@ import pickle as pkl
 def main():
     # job_cd
     job_cd = sys.argv[2]
-    list_job_cd = job_cd.split("_")
-    job_gubun = list_job_cd[0]
+    # list_job_cd = job_cd.split("_")
+    job_gubun = job_cd
     # prn_prop = list_job_cd[1]
     # ds_nm = "_".join(list_job_cd[2:])
     assert job_gubun in ["locw", "loca"]
@@ -38,7 +38,7 @@ def main():
     data_dir = prj_path + "data/"
     cache_dir = env_config["cache_dir"]
     device_id = "cpu" if job_gubun == "locw" else "gpu"
-    model_path_format = env_config["model_load_dir"] + "{model_id}"
+    # model_path_format = env_config["model_load_dir"] + "{model_id}"
     output_file_dir = prj_path + "data/output_logs/"
 
     # base_conf_path = data_dir + "clm_base_config.json"
