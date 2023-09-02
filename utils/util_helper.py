@@ -128,7 +128,7 @@ def get_module_info():
 
 def get_dataset_info():
     df_dataset = pd.read_csv(data_dir + "dataset_info.tsv", sep="\t")
-    df_dataset = df_dataset[["dataset_id", "latex_id", "dataset", "source", "category"]]
+    # df_dataset = df_dataset[["dataset_id", "latex_id", "dataset", "source", "category"]]
     df_dataset = df_dataset.reset_index(names=["idx"])
     df_dataset_ratio = pd.read_csv(data_dir + "dataset_ratio.tsv", sep="\t")
     return df_dataset, df_dataset_ratio
