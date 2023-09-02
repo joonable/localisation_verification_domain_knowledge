@@ -252,13 +252,14 @@ def main():
     output_file_dir = prj_path + "data/output_logs/"
     base_conf_path = data_dir + "eval_base_config.json"
     job_conf_path = output_file_dir + f"{job_cd}.json"
+    eval_result_path = output_file_dir + f"{job_cd}.txt"
 
     # experiment_setting
     with open(base_conf_path, 'r') as json_file:
         base_conf = json.load(json_file)
 
     model_path_format = env_config["model_load_dir"] + "{model_id}"
-    result_path = data_dir + f"df_{job_gubun}_results.tsv"
+    # result_path = data_dir + f"df_{job_gubun}_results.tsv"
 
     if model_gubun == "ft":
         model_id = "_".join(list_job_cd[2:])
@@ -588,9 +589,9 @@ def main():
             param.data = pruned_weight
 
         if prn_job_gubun in ["prnw", "prnbase"]:
-            df_local_result_path = data_dir + "localisation_weight_230813.tsv"
+            df_local_result_path = data_dir + "localisation_weight.tsv"
         elif prn_job_gubun in ["prna"]:
-            df_local_result_path = data_dir + "localisation_activation_230813.tsv"
+            df_local_result_path = data_dir + "localisation_activation.tsv"
 
         df_local_result = pd.read_csv(df_local_result_path, sep="\t")
         if prn_job_gubun in ["prnw", "prna"]:
@@ -715,12 +716,12 @@ def main():
             perplexity = float("inf")
         metrics["perplexity"] = perplexity
 
-        df_result = pd.read_csv(result_path, sep="\t")
-        result_col = "_".join(model_id.split("_")[:2]) if model_gubun == "ver" else model_gubun
-        df_result.loc[df_result.ds_nm == train_ds_nm, result_col] = perplexity
-        df_result.to_csv(result_path, sep="\t", index=False)
+        # df_result = pd.read_csv(result_path, sep="\t")
+        # result_col = "_".join(model_id.split("_")[:2]) if model_gubun == "ver" else model_gubun
+        # df_result.loc[df_result.ds_nm == train_ds_nm, result_col] = perplexity
+        # df_result.to_csv(result_path, sep="\t", index=False)
 
-        with open(prj_path + output_file_dir + f"{job_cd}.txt", "w") as text_file:
+        with open(eval_result_path, "w") as text_file:
             print(f"{loss}", file=text_file)
             print(f"{perplexity}", file=text_file)
 
