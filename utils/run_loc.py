@@ -23,7 +23,8 @@ def main():
     # job_cd
     job_cd = sys.argv[2]
     # list_job_cd = job_cd.split("_")
-    job_gubun = job_cd
+    job_gubun = job_cd.strip()
+    print(f"job_cd: {job_cd}")
     # prn_prop = list_job_cd[1]
     # ds_nm = "_".join(list_job_cd[2:])
     assert job_gubun in ["locw", "loca"]

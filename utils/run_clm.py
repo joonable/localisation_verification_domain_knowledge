@@ -233,7 +233,10 @@ def main():
 
     # job_cd
     job_cd = sys.argv[2]
+    print(f"job_cd: {job_cd}")
+
     list_job_cd = job_cd.split("_")
+    print(f"list_job_cd: {list_job_cd}")
     job_gubun = list_job_cd[0]
     assert job_gubun == "clm"
 
