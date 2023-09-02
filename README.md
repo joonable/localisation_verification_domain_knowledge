@@ -44,6 +44,30 @@ To address this limitation, we propose novel localisation methods that extend fr
   -  ``{in_or_out}``: in(in-domain dataset) and out(out-domain dataset)
   - ``{model_category}``: ft(fine-tuned model), gpt2(pre-trained gpt-2), and , ver(the edited/compressed models for verification)
   - ``{model_id}``: this id is equivalent to the name of datasets for ft and gpt2 or the their job code for ver.
+  - e.g. ``evalin_ver_prna_bot_nlin_l1``, ``evalin_ft_nlin_l1``, ``evalout_gpt2_nlin_l1``
 
 ## How to run the code?
-You can specify the job_codes in the ``list_job_cds`` in ``run_job.sh``. Depending on the job_cd, the corresponding python file is executed.  
+You can specify the job_codes in the ``list_job_cds`` in ``run_job.sh``. Depending on the job_cd, the corresponding python file is executed.
+
+```shell
+#!/bin/bash
+list_job_cds=("clm_nlin_l1" "prna_bot_nlin_l1" "evalin_ver_prna_bot_nlin_l1")
+
+for _job_cd in "${list_job_cds[@]}"; do
+  if [[ "$_job_cd" == "clm"* ]]; then
+    python ./utils/run_clm.py --job_cd _job_cd
+  elif [[ "$_job_cd" == "loc"* ]]; then
+    python ./utils/run_loc.py --job_cd _job_cd
+  elif [[ "$_job_cd" == "pft"* ]]; then
+    python ./utils/run_pft.py --job_cd _job_cd
+  elif [[ "$_job_cd" == "prn"* ]]; then
+    python ./utils/run_prn.py --job_cd _job_cd
+  elif [[ "$_job_cd" == "eval"* ]]; then
+    python ./utils/run_eval.py --job_cd _job_cd
+  else
+    echo "WRONG job_cd"
+  fi
+  echo "$_job_cd is executed"
+  sleep 5
+done
+```
