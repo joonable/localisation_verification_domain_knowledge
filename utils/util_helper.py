@@ -45,24 +45,6 @@ def get_model_config(model_id):
     return model_config
 
 
-def get_model_path(model_id):
-    model_path_format = "/rds/general/user/jj1122/home/projects/m2d2/dataset/{model_id}/models"
-    ckpt_path_format = "/checkpoint-{ckpt}"
-
-    if model_id == "gpt2":
-        model_path = "gpt2"
-#         ckpt = "zs"
-    else:
-        model_path = model_path_format.format(model_id=model_id)
-        l_dir = listdir(model_path)
-
-        if all([len(x.split(".")) == 1 for x in l_dir]):
-            ckpt = max([int(x.split("-")[1]) for x in l_dir])
-            model_path += ckpt_path_format.format(ckpt=ckpt)
-#         else:
-#             ckpt = "final"
-    return model_path
-
 def _parse_code_submodule(row):
     list_code = row.code.split(".")
     row["trace_id"] = ".".join(row["code"].split(".")[:-1])
